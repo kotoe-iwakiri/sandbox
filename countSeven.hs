@@ -3,10 +3,10 @@ import Data.List
 main :: IO ()
 main = do
     contents <- getContents
-    let xs = lines contents
-        limits = map read xs :: [Int]
-        sevens = map countSevenUntil limits
-    mapM_ print sevens
+    mapM_ print $ countSevenAll . lines $ contents
+
+countSevenAll :: [String] -> [Int]
+countSevenAll = map $ countSevenUntil . read
 
 countSevenUntil :: Int -> Int
 countSevenUntil limit = foldl' (\acc x -> acc + countSeven x) 0 [1 .. limit]
