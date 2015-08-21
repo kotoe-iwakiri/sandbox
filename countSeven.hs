@@ -1,3 +1,5 @@
+import Data.List
+
 main :: IO ()
 main = do
     contents <- getContents
@@ -5,10 +7,10 @@ main = do
         limits = map read xs :: [Int]
         sevens = map countSevenUntil limits
     mapM_ print sevens
- 
+
 countSevenUntil :: Int -> Int
-countSevenUntil limit = foldr (\x acc -> acc + countSeven x) 0 [1 .. limit]
- 
+countSevenUntil limit = foldl' (\acc x -> acc + countSeven x) 0 [1 .. limit]
+
 countSeven :: Int -> Int
 countSeven x
   | x < 10    = if x == 7 then 1 else 0
